@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .form-group {
+            margin-left: 35%;
+            margin-top: 50px;
+            background-color: #f7f6f4;
+            display: inline-block;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        label {
+            display: inline-block;
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+            color: #333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        input[type="text"], input[type="email"], input[type="password"], input[type="number"] {
+            width: 300px;
+            padding: 1rem;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 0.25rem;
+            margin-bottom: 10px;
+        }
+        input[type="submit"], input[type="reset"] {
+            width: 100px;
+            padding: 0.5rem;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 0.25rem;
+            margin-top: 20px;
+            text-align: center;
+            margin-left: 100px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+        .error {
+            color: red;
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <form action="success.html" onsubmit="return validate()" id="registrationForm">
+        <div class="form-group">
+            <h2 style="text-align: center;">Registration Form</h2>
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" value="">
+            <div id="usernameError" class="error"></div>
+
+            <label for="email">Email</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="email" name="email" id="email" value="">
+            <div id="emailError" class="error"></div>
+
+            <label for="password">Password</label>&nbsp;&nbsp;
+            <input type="password" name="password" id="password" value="">
+            <div id="pwdError" class="error"></div>
+
+            <label for="address">Address</label>&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="text" name="address" id="address" value="">
+            <div id="addressError" class="error"></div>
+
+            <label for="phone">Phone</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="number" name="phone" id="phone" value="">
+            <div id="phoneError" class="error"></div>
+
+            <input type="submit" value="Register">
+            <input type="reset" value="Reset">
+        </div>
+    </form>
+    <script>
+        function validate() {
+            const username = document.getElementById("username").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const address = document.getElementById("address").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+
+            const usernameError = document.getElementById("usernameError");
+            const emailError = document.getElementById("emailError");
+            const pwdError = document.getElementById("pwdError");
+            const addressError = document.getElementById("addressError");
+            const phoneError = document.getElementById("phoneError");
+
+            usernameError.innerHTML = "";
+            emailError.innerHTML = "";
+            pwdError.innerHTML = "";
+            addressError.innerHTML = "";
+            phoneError.innerHTML = "";
+
+            let isValid = true;
+
+            if (username === "" || /\d/.test(username)) {
+                usernameError.innerHTML = "Please enter a valid name without numbers.";
+                isValid = false;
+            }
+            if (address === "") {
+                addressError.innerHTML = "Please enter a valid address.";
+                isValid = false;
+            }
+            if (email === "" || !/\S+@\S+\.\S+/.test(email)) {
+                emailError.innerHTML = "Please enter a valid email address.";
+                isValid = false;
+            }
+            if (phone === "" || !/^\d{10}$/.test(phone)) {
+                phoneError.innerHTML = "Please enter a valid 10-digit phone number.";
+                isValid = false;
+            }
+            if (password === "" || password.length < 8) {
+                pwdError.innerHTML = "Password must be at least 8 characters long.";
+                isValid = false;
+            }
+            return isValid;
+        }
+    </script>
+</body>
+</html>
